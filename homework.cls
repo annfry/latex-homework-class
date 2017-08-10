@@ -45,9 +45,14 @@
 \RequirePackage{fancyhdr}
 \ifthenelse{\equal{\@oplargemargins}{1}}{}{\RequirePackage{fullpage}}
 
+% Nice Split Sections
+\RequirePackage{titlesec}
+
 % Links
 \RequirePackage{hyperref}
-
+\RequirePackage{listings}
+\lstset{basicstyle=\ttfamily,language=bash}
+\PassOptionsToPackage{hyphens}{url}\usepackage{hyperref}
 % ----- Questions -------------------------------------------------------------
 \newcounter{questionCounter}
 \newcounter{partCounter}[questionCounter]
@@ -103,8 +108,15 @@
 }
 
 % Override normal section defintions
-\renewcommand{\section}[0]{\question}
-\WithSuffix\newcommand\section*[1]{\question*{#1}}
+%\renewcommand{\section}[0]{\question}
+%\WithSuffix\newcommand\section*[1]{\question*{#1}}
+
+\titleformat{\section}         % Customise the \section command 
+  {\Large\scshape\raggedright} % Make the \section headers large (\Large),
+                               % small capitals (\scshape) and left aligned (\raggedright)
+  {}{0em}                      % Can be used to give a prefix to all sections, like 'Section ...'
+  {}                           % Can be used to insert code before the heading
+  [\titlerule]                 % Inserts a horizontal line after the heading
 
 % ----- Question Parts --------------------------------------------------------
 
@@ -154,8 +166,8 @@
     % Setup header
     \setlength{\headheight}{15.2pt}
     \setlength{\headsep}{0.2in}
-    \lhead{\hwclass{} \hwlecture\hwsection}%
-    \chead{\hwname{} (\hwemail)}%
+    \lhead{\hwclass{} \hwlecture\hwsection \hwname{} (\hwemail)}%
+    \chead{}%
     \rhead{\hwtype{} \hwnum}%
 
     % Setup hrule in header
@@ -168,8 +180,8 @@
     \begin{center}
       {\Large \hwclass{} \hwtype{} \hwnum}
 
-      \hwname{} (\hwemail)
-
+	\hwname{} (\hwemail)
+	
       \today
     \end{center}
     \renewcommand{\headrulewidth}{0.4pt}
@@ -185,8 +197,8 @@
     \begin{center}
       {\Large \hwclass{} \hwtype{} \hwnum}
 
-      \hwname{} (\hwemail)
-
+     \hwname{} (\hwemail)
+      
       \today
     \end{center}
     \renewcommand{\headrulewidth}{0.4pt}
